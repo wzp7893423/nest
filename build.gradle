@@ -34,6 +34,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE'
     compile 'org.springframework.data:spring-data-commons:2.1.0.M2'
     compile 'org.springframework.data:spring-data-jdbc:1.0.0.M2'
+    compile 'org.springframework.data:spring-data-mongodb:2.0.5.RELEASE'
     //data driver
     runtime 'org.hsqldb:hsqldb:2.4.0'
     compile 'mysql:mysql-connector-java:5.0.8'

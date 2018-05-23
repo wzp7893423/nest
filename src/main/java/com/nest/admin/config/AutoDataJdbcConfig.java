@@ -28,7 +28,6 @@ import java.util.Optional;
  * Created by wzp on 2018/5/14.
  */
 @Configuration
-@ConditionalOnProperty
 @EnableConfigurationProperties(JdbcDataProperties.class)
 @EnableJdbcRepositories(basePackages={"com.nest.function"},repositoryFactoryBeanClass= MybatisJdbcRepositoryFactoryBean.class)
 public class AutoDataJdbcConfig {
