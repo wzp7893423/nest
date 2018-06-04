@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 /**
  * Created by wzp on 2018/5/8.
  */
-@SpringBootApplication(exclude = {MongoAutoConfiguration.class})
+@SpringBootApplication()
 public class NestAdminApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args){
