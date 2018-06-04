@@ -7,5 +7,5 @@ import org.springframework.stereotype.Indexed;
  * Created by wzp on 2018/6/4.
  */
 @NoRepositoryBean
-public interface MongoRepository {
+public interface MongoRepository<T> {
 }
