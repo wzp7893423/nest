@@ -2,8 +2,8 @@ package com.nest.admin.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.nest.admin.core.fromwork.annotation.TableName;
-import com.nest.admin.core.fromwork.jdbc.JdbcDataProperties;
-import com.nest.admin.core.fromwork.mybatis.support.MybatisJdbcRepositoryFactoryBean;
+import com.nest.admin.core.fromwork.jdbc.config.JdbcDataProperties;
+import com.nest.admin.core.fromwork.jdbc.mybatis.support.MybatisJdbcRepositoryFactoryBean;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

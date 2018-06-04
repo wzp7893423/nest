@@ -1,6 +1,6 @@
-package com.nest.admin.core.fromwork.mybatis.support;
+package com.nest.admin.core.fromwork.jdbc.mybatis.support;
 
-import com.nest.admin.core.fromwork.mapper.CustomEntityRowMapperMap;
+import com.nest.admin.core.fromwork.jdbc.mapper.CustomEntityRowMapperMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
