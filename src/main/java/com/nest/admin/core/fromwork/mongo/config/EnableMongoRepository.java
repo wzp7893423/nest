@@ -15,7 +15,6 @@ import java.lang.annotation.*;
 @Inherited
 @Import(MonogRepositoryRegistrar.class)
 public @interface EnableMongoRepository {
-
     String[] basePackages() default {};
 
     ComponentScan.Filter[] includeFilters() default {};

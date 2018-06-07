@@ -1,11 +1,7 @@
 package com.nest.admin.core.fromwork.mongo.config;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.repository.config.*;
-
-import java.util.Collection;
+import com.nest.admin.core.fromwork.mongo.support.MongoRepositoryFactoryBean;
+import org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport;
 
 /**
  * Created by wzp on 2018/6/4.
@@ -14,11 +10,10 @@ public class MongoRepositoryConfigurationExtension extends RepositoryConfigurati
 
     @Override
     protected String getModulePrefix() {
-        return null;
+        return "MONGO";
     }
-
     @Override
     public String getRepositoryFactoryBeanClassName() {
-        return null;
+        return MongoRepositoryFactoryBean.class.getName();
     }
 }
