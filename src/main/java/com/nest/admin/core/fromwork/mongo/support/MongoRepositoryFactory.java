@@ -1,15 +1,21 @@
 package com.nest.admin.core.fromwork.mongo.support;
 
+import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisJdbcEntityTemplate;
+import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisSimpleRepository;
 import com.nest.admin.core.fromwork.mongo.MongoRepository;
+import com.nest.admin.core.fromwork.mongo.SimpleMongoRepository;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.data.jdbc.mapping.model.JdbcPersistentEntityInformation;
+import org.springframework.data.repository.core.RepositoryInformation;
 
 /**
  * Created by wzp on 2018/6/4.
  */
-public class MongoRepositoryFactory<T extends MongoRepository> implements BeanClassLoaderAware, BeanFactoryAware {
+public class MongoRepositoryFactory implements BeanClassLoaderAware, BeanFactoryAware {
 
     private  ClassLoader classLoader;
 
@@ -23,5 +29,16 @@ public class MongoRepositoryFactory<T extends MongoRepository> implements BeanCl
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
+    }
+
+    protected Object getTargetRepository() {
+
+        return new SimpleMongoRepository<>();
+    }
+    @SuppressWarnings({ "unchecked" })
+    public <T> T getRepository(){
+        ProxyFactory result = new ProxyFactory();
+        result.setTarget(getTargetRepository());
+        return (T) result.getProxy(classLoader);
     }
 }

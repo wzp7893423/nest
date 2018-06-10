@@ -22,6 +22,10 @@ public class MongoRepositoryFactoryBean<T extends MongoRepository> implements In
 
     private  boolean lazyInit;
 
+    private MongoRepositoryFactory factory;
+
+
+
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
@@ -39,7 +43,8 @@ public class MongoRepositoryFactoryBean<T extends MongoRepository> implements In
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (lazyInit){
+        repository = Lazy.of(()->this.factory.getRepository());
+        if (!lazyInit){
             repository.get();
         }
     }
