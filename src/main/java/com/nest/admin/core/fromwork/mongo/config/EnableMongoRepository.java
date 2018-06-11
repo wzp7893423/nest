@@ -20,6 +20,8 @@ public @interface EnableMongoRepository {
 
     String[] basePackages() default {};
 
+    Class[] basePackageClasses() default {};
+
     ComponentScan.Filter[] includeFilters() default {};
 
     ComponentScan.Filter[] excludeFilters() default {};

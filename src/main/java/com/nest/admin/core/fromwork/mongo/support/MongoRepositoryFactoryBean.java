@@ -9,6 +9,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.data.util.Lazy;
+import org.springframework.util.Assert;
 
 /**
  * Created by wzp on 2018/6/4.
@@ -24,7 +25,12 @@ public class MongoRepositoryFactoryBean<T extends MongoRepository> implements In
 
     private MongoRepositoryFactory factory;
 
+    private final  Class<? extends T> repositoryInterface;
 
+    MongoRepositoryFactoryBean(Class<? extends T> repositoryInterface){
+        Assert.isNull(repositoryInterface,"repositoryInterface is null");
+        this.repositoryInterface = repositoryInterface;
+    }
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
@@ -33,24 +39,29 @@ public class MongoRepositoryFactoryBean<T extends MongoRepository> implements In
 
     @Override
     public T getObject() throws Exception {
-        return null;
+        return repository.get();
     }
 
     @Override
     public Class <?> getObjectType() {
-        return null;
+        return repositoryInterface;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        repository = Lazy.of(()->this.factory.getRepository());
-        if (!lazyInit){
-            repository.get();
-        }
+    private MongoRepositoryFactory createRepositoryFactory() {
+        return new MongoRepositoryFactory();
     }
 
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
 
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        factory = createRepositoryFactory();
+        repository = Lazy.of(()->this.factory.getRepository());
+        if (!lazyInit){
+            repository.get();
+        }
     }
 }

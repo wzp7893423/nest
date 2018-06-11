@@ -32,7 +32,6 @@ public class MongoRepositoryFactory implements BeanClassLoaderAware, BeanFactory
     }
 
     protected Object getTargetRepository() {
-
         return new SimpleMongoRepository<>();
     }
     @SuppressWarnings({ "unchecked" })
