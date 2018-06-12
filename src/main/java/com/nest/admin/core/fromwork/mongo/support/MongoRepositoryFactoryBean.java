@@ -1,67 +1,33 @@
 package com.nest.admin.core.fromwork.mongo.support;
 
 import com.nest.admin.core.fromwork.mongo.MongoRepository;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.*;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.data.repository.core.NamedQueries;
+import org.springframework.data.repository.core.support.RepositoryComposition;
+import org.springframework.data.repository.query.DefaultEvaluationContextProvider;
+import org.springframework.data.repository.query.EvaluationContextProvider;
+import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.data.util.Lazy;
 import org.springframework.util.Assert;
+
+import java.util.Optional;
 
 /**
  * Created by wzp on 2018/6/4.
  */
-public class MongoRepositoryFactoryBean<T extends MongoRepository> implements InitializingBean,FactoryBean,
-        BeanFactoryAware, ApplicationEventPublisherAware {
+public class MongoRepositoryFactoryBean<T extends MongoRepository> extends AbstractMongoRepositorySupport{
 
-    private BeanFactory beanFactory;
-
-    private Lazy<T> repository;
-
-    private  boolean lazyInit;
-
-    private MongoRepositoryFactory factory;
-
-    private final  Class<? extends T> repositoryInterface;
 
     MongoRepositoryFactoryBean(Class<? extends T> repositoryInterface){
-        Assert.isNull(repositoryInterface,"repositoryInterface is null");
-        this.repositoryInterface = repositoryInterface;
+        super(repositoryInterface);
     }
 
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
-    }
 
-    @Override
-    public T getObject() throws Exception {
-        return repository.get();
-    }
-
-    @Override
-    public Class <?> getObjectType() {
-        return repositoryInterface;
-    }
-
-    private MongoRepositoryFactory createRepositoryFactory() {
+    protected MongoRepositoryFactory createRepositoryFactory() {
         return new MongoRepositoryFactory();
-    }
-
-    @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        factory = createRepositoryFactory();
-        repository = Lazy.of(()->this.factory.getRepository());
-        if (!lazyInit){
-            repository.get();
-        }
     }
 }

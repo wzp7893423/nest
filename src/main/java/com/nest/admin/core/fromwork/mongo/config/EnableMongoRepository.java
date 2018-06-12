@@ -28,4 +28,8 @@ public @interface EnableMongoRepository {
 
     Class<?> repositoryFactoryBeanClass() default  MongoRepositoryFactoryBean.class;
 
+    String namedQueriesLocation() default "";
+
+    String repositoryImplementationPostfix() default "Impl";
+
 }

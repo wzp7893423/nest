@@ -1,6 +1,6 @@
 package com.nest.function.sys.user;
 
-import com.nest.admin.core.fromwork.mybatis.MybatisRepository;
+import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisRepository;
 import org.springframework.data.jdbc.repository.query.Query;
 
 import java.util.List;

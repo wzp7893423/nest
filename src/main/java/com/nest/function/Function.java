@@ -1,5 +1,8 @@
 package com.nest.function;
 
+import com.nest.function.staticd.CustomStatisticsRepository;
+import com.nest.function.staticd.Statistics;
+import com.nest.function.staticd.StatisticsRepository;
 import com.nest.function.sys.user.User;
 import com.nest.function.sys.user.UserInfoRepository;
 import com.nest.function.sys.user.UserRepository;
@@ -27,6 +30,9 @@ public class Function {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
+    @Autowired
+    private StatisticsRepository statisticsRepository;
+
 
     @RequestMapping("/test")
     public Iterable <User> get(Pageable pageable) {
@@ -38,5 +44,17 @@ public class Function {
         System.out.println(userRepository.selectList("findUserEntry",params));
         List <User> list = Arrays.asList(new User[5]);
         return  userRepository.findAll();
+    }
+
+    @RequestMapping("/static")
+    public Iterable<Statistics> get(){
+        return statisticsRepository.findAll();
+    }
+
+    @Autowired
+    private CustomStatisticsRepository customStatisticsRepository;
+    @RequestMapping("/set")
+    public  void set(){
+        customStatisticsRepository.findALl();
     }
 }

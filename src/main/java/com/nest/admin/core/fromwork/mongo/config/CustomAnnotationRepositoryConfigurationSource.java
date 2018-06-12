@@ -16,15 +16,7 @@ import java.lang.annotation.Annotation;
 public class CustomAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource{
     private final Environment environment;
     private final BeanDefinitionRegistry registry;
-    /**
-     * Creates a new {@link AnnotationRepositoryConfigurationSource} from the given {@link AnnotationMetadata} and
-     * annotation.
-     *  @param metadata       must not be {@literal null}.
-     * @param annotation     must not be {@literal null}.
-     * @param resourceLoader must not be {@literal null}.
-     * @param environment    must not be {@literal null}.
-     * @param registry       must not be {@literal null}.
-     */
+
     public CustomAnnotationRepositoryConfigurationSource(AnnotationMetadata metadata, Class <? extends Annotation> annotation, ResourceLoader resourceLoader, Environment environment, BeanDefinitionRegistry registry) {
         super(metadata, annotation, resourceLoader, environment, registry);
         this.environment = environment;
@@ -42,4 +34,5 @@ public class CustomAnnotationRepositoryConfigurationSource extends AnnotationRep
         return Streamable.of(() -> getBasePackages().stream()//
                 .flatMap(it -> scanner.findCandidateComponents(it).stream()));
     }
+
 }

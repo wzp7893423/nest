@@ -40,11 +40,6 @@ public class MybatisJdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID
         this.publisher = publisher;
     }
 
-    /**
-     * Creates the actual {@link RepositoryFactorySupport} instance.
-     *
-     * @return
-     */
     @Override
     protected RepositoryFactorySupport doCreateRepositoryFactory() {
 
@@ -62,18 +57,11 @@ public class MybatisJdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID
         this.mappingContext = mappingContext;
     }
 
-    /**
-     * @param dataAccessStrategy can be {@literal null}.
-     */
     @Autowired(required = false)
     public void setDataAccessStrategy(DataAccessStrategy dataAccessStrategy) {
         this.dataAccessStrategy = dataAccessStrategy;
     }
 
-    /**
-     * @param rowMapperMap can be {@literal null}. {@link #afterPropertiesSet()} defaults to {@link RowMapperMap#EMPTY} if
-     *          {@literal null}.
-     */
     @Autowired(required = false)
     public void setRowMapperMap(RowMapperMap rowMapperMap) {
         this.rowMapperMap = rowMapperMap;
