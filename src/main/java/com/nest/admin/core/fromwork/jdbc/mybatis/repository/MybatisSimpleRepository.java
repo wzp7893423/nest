@@ -1,5 +1,7 @@
-package com.nest.admin.core.fromwork.jdbc.mybatis;
+package com.nest.admin.core.fromwork.jdbc.mybatis.repository;
 
+import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisEntityOperations;
+import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisJdbcEntityTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

@@ -1,7 +1,7 @@
 package com.nest.admin.core.fromwork.jdbc.mybatis.support;
 
 import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisJdbcEntityTemplate;
-import com.nest.admin.core.fromwork.jdbc.mybatis.MybatisSimpleRepository;
+import com.nest.admin.core.fromwork.jdbc.mybatis.repository.MybatisSimpleRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.jdbc.core.DataAccessStrategy;

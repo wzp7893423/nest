@@ -1,6 +1,6 @@
 package com.nest.admin.core.fromwork.mongo.support;
 
-import com.nest.admin.core.fromwork.mongo.MongoRepository;
+import com.nest.admin.core.fromwork.mongo.repository.MongoRepository;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 import org.springframework.context.ApplicationEventPublisher;

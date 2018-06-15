@@ -1,6 +1,6 @@
 package com.nest.admin.core.fromwork.mongo.config;
 
-import com.nest.admin.core.fromwork.mongo.MongoRepository;
+import com.nest.admin.core.fromwork.mongo.repository.MongoRepository;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

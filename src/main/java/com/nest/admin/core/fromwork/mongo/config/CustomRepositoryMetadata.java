@@ -1,6 +1,6 @@
 package com.nest.admin.core.fromwork.mongo.config;
 
-import com.nest.admin.core.fromwork.mongo.MongoRepository;
+import com.nest.admin.core.fromwork.mongo.repository.MongoRepository;
 import org.springframework.data.repository.core.CrudMethods;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.DefaultCrudMethods;

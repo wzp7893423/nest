@@ -1,4 +1,4 @@
-package com.nest.admin.core.fromwork.jdbc.mybatis;
+package com.nest.admin.core.fromwork.jdbc.mybatis.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

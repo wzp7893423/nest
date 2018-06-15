@@ -1,4 +1,4 @@
-package com.nest.admin.core.fromwork.mongo;
+package com.nest.admin.core.fromwork.mongo.repository;
 
 import com.google.common.collect.Lists;
 import org.mongodb.morphia.converters.ObjectIdConverter;
