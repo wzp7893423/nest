@@ -1,0 +1,48 @@
+#jdbc 连接池的配置信息
+spring:
+      datasource:
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://172.16.17.3:3306/alarm?characterEncoding=UTF-8
+          username: alarm
+          password: 123alarm
+          initialSize: 5
+          minIdle: 5
+          maxActive: 20
+          axWait: 60000
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: SELECT 1 FROM DUAL
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+          poolPreparedStatements: true
+          maxPoolPreparedStatementPerConnectionSize: 20
+          filters: stat,wall
+          connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+mybatis:
+      config-location: classpath:mybatis-config.xml
+#mongo 链接池的配置信息
+spring:
+      data:
+        mongodb:
+          database: DTXYJK
+          host: 172.16.17.3
+          port: 27017
+          username: robotassister
+          password: xxyyyxxxxx
+          mongos:
+            - database: DTXYJK
+              host: 172.16.17.3
+              port: 27017
+              username: robotassister
+              password: xxyyyxxxxx
+            - database: DTXYJK
+              host: 172.16.17.3
+              port: 27017
+              username: robotassister
+              password: xxyyyxxxxx
+            - database: DTXYJK
+              host: 172.16.17.3
+              port: 27017
+              username: robotassister
+              password: xxyyyxxxxx
