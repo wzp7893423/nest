@@ -15,8 +15,8 @@ public class CustomEntityRowMapperMap<T> implements RowMapperMap {
 
     @Override
     public <T> RowMapper <? extends T> rowMapperFor(Class <T> type) {
-        Optional<RowMapperClass> rowMapperClass = Optional.ofNullable(type.getAnnotation(RowMapperClass.class));
-        if(rowMapperClass.isPresent()){
+        Optional <RowMapperClass> rowMapperClass = Optional.ofNullable(type.getAnnotation(RowMapperClass.class));
+        if (rowMapperClass.isPresent()) {
             try {
                 return rowMapperClass.get().mapperClass().getConstructor(type).newInstance(type);
             } catch (InstantiationException e) {

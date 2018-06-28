@@ -1,5 +1,7 @@
 package com.nest.admin.core.fromwork.mongo.support;
 
+import com.nest.admin.core.fromwork.mongo.core.CustomRepositoryMetadata;
+import com.nest.admin.core.fromwork.mongo.core.MongoEntity;
 import com.nest.admin.core.fromwork.mongo.core.MongoEntityInformation;
 import com.nest.admin.core.fromwork.mongo.core.MongoEntityOperations;
 import com.nest.admin.core.fromwork.mongo.repository.MongoRepository;
@@ -9,6 +11,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.data.repository.core.RepositoryMetadata;
+import org.springframework.data.repository.core.support.RepositoryComposition;
 import org.springframework.transaction.interceptor.TransactionalProxy;
 
 /**
@@ -16,14 +20,14 @@ import org.springframework.transaction.interceptor.TransactionalProxy;
  */
 public class MongoRepositoryFactory implements BeanClassLoaderAware, BeanFactoryAware {
 
-    private  ClassLoader classLoader;
+    private ClassLoader classLoader;
 
-    private  BeanFactory beanFactory;
+    private BeanFactory beanFactory;
 
     private MongoEntityOperations mongoEntityOperations;
 
     public MongoRepositoryFactory(MongoEntityOperations mongoEntityOperations) {
-        this.mongoEntityOperations=mongoEntityOperations;
+        this.mongoEntityOperations = mongoEntityOperations;
     }
 
     @Override
@@ -37,12 +41,16 @@ public class MongoRepositoryFactory implements BeanClassLoaderAware, BeanFactory
     }
 
     protected Object getTargetRepository(MongoEntityInformation mongoEntityInformation) {
-        return new SimpleMongoRepository<>();
+        MongoEntity mongoEntity = null;
+        return new SimpleMongoRepository <>(mongoEntityOperations, mongoEntity);
     }
-    @SuppressWarnings({ "unchecked" })
-    public <T> T getRepository(Class <? extends T> repositoryInterface){
+
+    @SuppressWarnings({"unchecked"})
+    public <T> T getRepository(Class <? extends T> repositoryInterface, RepositoryComposition.RepositoryFragments repositoryFragmentsToUse) {
+        RepositoryMetadata repositoryMetadata = new CustomRepositoryMetadata(repositoryInterface);
+        MongoEntityInformation mongoEntityInformation = MongoEntityInformation.getMongoEntityInfomation(repositoryMetadata, repositoryFragmentsToUse);
         ProxyFactory result = new ProxyFactory();
-        result.setTarget(getTargetRepository(null));
+        result.setTarget(getTargetRepository(mongoEntityInformation));
         result.setInterfaces(repositoryInterface, MongoRepository.class, TransactionalProxy.class);
         return (T) result.getProxy(classLoader);
     }

@@ -20,8 +20,8 @@ import java.io.Serializable;
 /**
  * Created by wzp on 2018/5/17.
  */
-public class MybatisJdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID extends Serializable> //
-        extends TransactionalRepositoryFactoryBeanSupport<T, S, ID> implements ApplicationEventPublisherAware {
+public class MybatisJdbcRepositoryFactoryBean<T extends Repository <S, ID>, S, ID extends Serializable> //
+        extends TransactionalRepositoryFactoryBeanSupport <T, S, ID> implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
     private JdbcMappingContext mappingContext;
@@ -29,7 +29,7 @@ public class MybatisJdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID
     private RowMapperMap rowMapperMap = new CustomEntityRowMapperMap <>();
     private SqlSession sqlSession;
 
-    MybatisJdbcRepositoryFactoryBean(Class<? extends T> repositoryInterface) {
+    MybatisJdbcRepositoryFactoryBean(Class <? extends T> repositoryInterface) {
         super(repositoryInterface);
     }
 
@@ -44,7 +44,7 @@ public class MybatisJdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID
     protected RepositoryFactorySupport doCreateRepositoryFactory() {
 
         MybatisJdbcRepositoryFactory jdbcRepositoryFactory = new MybatisJdbcRepositoryFactory(publisher, mappingContext,
-                dataAccessStrategy,sqlSession);
+                dataAccessStrategy, sqlSession);
         jdbcRepositoryFactory.setRowMapperMap(rowMapperMap);
 
         return jdbcRepositoryFactory;
@@ -66,10 +66,12 @@ public class MybatisJdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID
     public void setRowMapperMap(RowMapperMap rowMapperMap) {
         this.rowMapperMap = rowMapperMap;
     }
+
     @Autowired
     protected void setSqlSession(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
+
     @Override
     public void afterPropertiesSet() {
 

@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by wzp on 2018/5/17.
  */
-public interface MybatisRepository<T,ID> extends PagingAndSortingRepository<T,ID> {
+public interface MybatisRepository<T, ID> extends PagingAndSortingRepository <T, ID> {
 
-    List<T> selectList(String namespance, Map<String,Object> params);
+    List <T> selectList(String namespance, Map <String, Object> params);
 }

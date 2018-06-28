@@ -3,7 +3,6 @@ package com.nest.function.sys.user;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.jdbc.repository.query.Query;
 
 /**
  * Created by wzp on 2018/5/14.
@@ -11,9 +10,10 @@ import org.springframework.data.jdbc.repository.query.Query;
 @Data
 @Alias("com.nest.admin.function.User")
 public class User {
-    private @Id Long id;
+    private @Id
+    Long id;
 
-    private String userName,loginName;
+    private String userName, loginName;
 
     private Integer age;
 
@@ -31,7 +31,7 @@ public class User {
         this.age = age;
     }
 
-    public User(){
+    public User() {
 
     }
 }

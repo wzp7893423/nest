@@ -25,17 +25,17 @@ class MybatisJdbcInterprete implements Interpreter {
     }
 
     @Override
-    public <T> void interpret(DbAction.Insert<T> insert) {
+    public <T> void interpret(DbAction.Insert <T> insert) {
         accessStrategy.insert(insert.getEntity(), insert.getEntityType(), createAdditionalColumnValues(insert));
     }
 
     @Override
-    public <T> void interpret(DbAction.Update<T> update) {
+    public <T> void interpret(DbAction.Update <T> update) {
         accessStrategy.update(update.getEntity(), update.getEntityType());
     }
 
     @Override
-    public <T> void interpret(DbAction.Delete<T> delete) {
+    public <T> void interpret(DbAction.Delete <T> delete) {
 
         if (delete.getPropertyPath() == null) {
             accessStrategy.delete(delete.getRootId(), delete.getEntityType());
@@ -45,7 +45,7 @@ class MybatisJdbcInterprete implements Interpreter {
     }
 
     @Override
-    public <T> void interpret(DbAction.DeleteAll<T> delete) {
+    public <T> void interpret(DbAction.DeleteAll <T> delete) {
 
         if (delete.getEntityType() == null) {
             accessStrategy.deleteAll(delete.getPropertyPath().getPath());
@@ -54,16 +54,16 @@ class MybatisJdbcInterprete implements Interpreter {
         }
     }
 
-    private <T> Map<String, Object> createAdditionalColumnValues(DbAction.Insert<T> insert) {
+    private <T> Map <String, Object> createAdditionalColumnValues(DbAction.Insert <T> insert) {
 
-        Map<String, Object> additionalColumnValues = new HashMap<>();
+        Map <String, Object> additionalColumnValues = new HashMap <>();
         addDependingOnInformation(insert, additionalColumnValues);
         additionalColumnValues.putAll(insert.getAdditionalValues());
 
         return additionalColumnValues;
     }
 
-    private <T> void addDependingOnInformation(DbAction.Insert<T> insert, Map<String, Object> additionalColumnValues) {
+    private <T> void addDependingOnInformation(DbAction.Insert <T> insert, Map <String, Object> additionalColumnValues) {
 
         DbAction dependingOn = insert.getDependingOn();
 
@@ -71,7 +71,7 @@ class MybatisJdbcInterprete implements Interpreter {
             return;
         }
 
-        JdbcPersistentEntity<?> persistentEntity = context.getRequiredPersistentEntity(dependingOn.getEntityType());
+        JdbcPersistentEntity <?> persistentEntity = context.getRequiredPersistentEntity(dependingOn.getEntityType());
 
         String columnName = getColumnNameForReverseColumn(insert, persistentEntity);
 
@@ -80,11 +80,11 @@ class MybatisJdbcInterprete implements Interpreter {
         additionalColumnValues.put(columnName, identifier);
     }
 
-    private Object getIdFromEntityDependingOn(DbAction dependingOn, JdbcPersistentEntity<?> persistentEntity) {
+    private Object getIdFromEntityDependingOn(DbAction dependingOn, JdbcPersistentEntity <?> persistentEntity) {
         return persistentEntity.getIdentifierAccessor(dependingOn.getEntity()).getIdentifier();
     }
 
-    private <T> String getColumnNameForReverseColumn(DbAction.Insert<T> insert, JdbcPersistentEntity<?> persistentEntity) {
+    private <T> String getColumnNameForReverseColumn(DbAction.Insert <T> insert, JdbcPersistentEntity <?> persistentEntity) {
 
         PropertyPath path = insert.getPropertyPath().getPath();
 

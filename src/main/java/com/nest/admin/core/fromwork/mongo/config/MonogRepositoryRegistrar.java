@@ -7,7 +7,9 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
-import org.springframework.data.repository.config.*;
+import org.springframework.data.repository.config.RepositoryConfigurationDelegate;
+import org.springframework.data.repository.config.RepositoryConfigurationExtension;
+import org.springframework.data.repository.config.RepositoryConfigurationUtils;
 import org.springframework.util.Assert;
 
 import javax.annotation.Nonnull;
@@ -18,9 +20,11 @@ import java.lang.annotation.Annotation;
  */
 public class MonogRepositoryRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware, EnvironmentAware {
 
-    private @SuppressWarnings("null") @Nonnull
+    private @SuppressWarnings("null")
+    @Nonnull
     ResourceLoader resourceLoader;
-    private @SuppressWarnings("null") @Nonnull
+    private @SuppressWarnings("null")
+    @Nonnull
     Environment environment;
 
     @Override

@@ -10,9 +10,10 @@ import org.springframework.data.annotation.Id;
 @TableName("User")
 @Data
 public class UserInfo {
-    private @Id Long id;
+    private @Id
+    Long id;
 
-    private String userName,loginName;
+    private String userName, loginName;
 
     private Integer age;
 

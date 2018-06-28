@@ -1,5 +1,6 @@
 package com.nest.admin.core.fromwork.mongo.config;
 
+import com.nest.admin.core.fromwork.mongo.core.CustomRepositoryMetadata;
 import com.nest.admin.core.fromwork.mongo.support.MongoRepositoryFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.data.repository.config.RepositoryConfiguration;
 import org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport;
 import org.springframework.data.repository.config.RepositoryConfigurationSource;
 import org.springframework.data.repository.core.RepositoryMetadata;
-import org.springframework.data.repository.core.support.AbstractRepositoryMetadata;
 import org.springframework.util.Assert;
 
 import javax.annotation.Nullable;
@@ -27,28 +27,30 @@ public class MongoRepositoryConfigurationExtension extends RepositoryConfigurati
     private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryConfigurationExtensionSupport.class);
     private static final String CLASS_LOADING_ERROR = "%s - Could not load type %s using class loader %s.";
     private static final String MULTI_STORE_DROPPED = "Spring Data {} - Could not safely identify store assignment for repository candidate {}.";
+
     @Override
     protected String getModulePrefix() {
         return "MONGO";
     }
+
     @Override
     public String getRepositoryFactoryBeanClassName() {
         return MongoRepositoryFactoryBean.class.getName();
     }
 
     @Override
-    public <T extends RepositoryConfigurationSource> Collection<RepositoryConfiguration<T>> getRepositoryConfigurations(
+    public <T extends RepositoryConfigurationSource> Collection <RepositoryConfiguration <T>> getRepositoryConfigurations(
             T configSource, ResourceLoader loader, boolean strictMatchesOnly) {
 
         Assert.notNull(configSource, "ConfigSource must not be null!");
         Assert.notNull(loader, "Loader must not be null!");
 
-        Set<RepositoryConfiguration<T>> result = new HashSet<>();
+        Set <RepositoryConfiguration <T>> result = new HashSet <>();
 
         for (BeanDefinition candidate : configSource.getCandidates(loader)) {
 
-            RepositoryConfiguration<T> configuration = getRepositoryConfiguration(candidate, configSource);
-            Class<?> repositoryInterface = loadRepositoryInterface(configuration,
+            RepositoryConfiguration <T> configuration = getRepositoryConfiguration(candidate, configSource);
+            Class <?> repositoryInterface = loadRepositoryInterface(configuration,
                     super.getConfigurationInspectionClassLoader(loader));
 
             if (repositoryInterface == null) {
@@ -73,8 +75,9 @@ public class MongoRepositoryConfigurationExtension extends RepositoryConfigurati
         }
         return result;
     }
-    private Class<?> loadRepositoryInterface(RepositoryConfiguration<?> configuration,
-                                             @Nullable ClassLoader classLoader) {
+
+    private Class <?> loadRepositoryInterface(RepositoryConfiguration <?> configuration,
+                                              @Nullable ClassLoader classLoader) {
 
         String repositoryInterface = configuration.getRepositoryInterface();
 
@@ -89,23 +92,23 @@ public class MongoRepositoryConfigurationExtension extends RepositoryConfigurati
 
     protected boolean isStrictRepositoryCandidate(RepositoryMetadata metadata) {
 
-        Collection<Class<?>> types = getIdentifyingTypes();
-        Class<?> repositoryInterface = metadata.getRepositoryInterface();
+        Collection <Class <?>> types = getIdentifyingTypes();
+        Class <?> repositoryInterface = metadata.getRepositoryInterface();
 
-        for (Class<?> type : types) {
+        for (Class <?> type : types) {
             if (type.isAssignableFrom(repositoryInterface)) {
                 return true;
             }
         }
 
-        Class<?> domainType = metadata.getDomainType();
-        Collection<Class<? extends Annotation>> annotations = getIdentifyingAnnotations();
+        Class <?> domainType = metadata.getDomainType();
+        Collection <Class <? extends Annotation>> annotations = getIdentifyingAnnotations();
 
         if (annotations.isEmpty()) {
             return true;
         }
 
-        for (Class<? extends Annotation> annotationType : annotations) {
+        for (Class <? extends Annotation> annotationType : annotations) {
             if (AnnotationUtils.findAnnotation(domainType, annotationType) != null) {
                 return true;
             }

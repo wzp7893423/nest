@@ -28,13 +28,13 @@ import java.util.Optional;
  */
 @Configuration
 @EnableConfigurationProperties(JdbcDataProperties.class)
-@EnableJdbcRepositories(basePackages={"com.nest.function"},repositoryFactoryBeanClass= MybatisJdbcRepositoryFactoryBean.class)
+@EnableJdbcRepositories(basePackages = {"com.nest.function"}, repositoryFactoryBeanClass = MybatisJdbcRepositoryFactoryBean.class)
 public class AutoDataJdbcConfig {
 
     private final Logger logger = LoggerFactory.getLogger(AutoDataJdbcConfig.class);
 
     @Bean
-    public DataSource dataSource(JdbcDataProperties jdbcDataProperties){
+    public DataSource dataSource(JdbcDataProperties jdbcDataProperties) {
         DruidDataSource datasource = new DruidDataSource();
 
         datasource.setUrl(jdbcDataProperties.getUrl());
@@ -71,18 +71,18 @@ public class AutoDataJdbcConfig {
         return MyBatisDataAccessStrategy.createCombinedAccessStrategy(context, sqlSession);
     }
 
-//    @Bean
+    //    @Bean
     public NamingStrategy namingStrategy() {
         String delimiter = "_";
         return new NamingStrategy() {
 
             @Override
-            public String getTableName(Class<?> type) {
-                Optional<TableName> tableName = Optional.ofNullable(type.getAnnotation(TableName.class));
-                if(tableName.isPresent()){
+            public String getTableName(Class <?> type) {
+                Optional <TableName> tableName = Optional.ofNullable(type.getAnnotation(TableName.class));
+                if (tableName.isPresent()) {
                     return tableName.get().value();
 //                    return ParsingUtils.reconcatenateCamelCase(typeAlias.get().value(), delimiter);
-                }else{
+                } else {
                     return ParsingUtils.reconcatenateCamelCase(NamingStrategy.super.getTableName(type), delimiter);
                 }
             }

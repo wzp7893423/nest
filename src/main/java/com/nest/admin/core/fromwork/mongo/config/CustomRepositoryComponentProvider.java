@@ -35,9 +35,9 @@ public class CustomRepositoryComponentProvider extends ClassPathScanningCandidat
      * picked up.
      *
      * @param includeFilters the {@link TypeFilter}s to select repository interfaces to consider, must not be
-     *          {@literal null}.
+     *                       {@literal null}.
      */
-    public CustomRepositoryComponentProvider(Iterable<? extends TypeFilter> includeFilters, BeanDefinitionRegistry registry) {
+    public CustomRepositoryComponentProvider(Iterable <? extends TypeFilter> includeFilters, BeanDefinitionRegistry registry) {
 
         super(false);
 
@@ -67,13 +67,13 @@ public class CustomRepositoryComponentProvider extends ClassPathScanningCandidat
     @Override
     public void addIncludeFilter(TypeFilter includeFilter) {
 
-        List<TypeFilter> filterPlusInterface = new ArrayList<>(2);
+        List <TypeFilter> filterPlusInterface = new ArrayList <>(2);
         filterPlusInterface.add(includeFilter);
         filterPlusInterface.add(new CustomRepositoryComponentProvider.InterfaceTypeFilter(MongoRepository.class));
 
         super.addIncludeFilter(new CustomRepositoryComponentProvider.AllTypeFilter(filterPlusInterface));
 
-        List<TypeFilter> filterPlusAnnotation = new ArrayList<>(2);
+        List <TypeFilter> filterPlusAnnotation = new ArrayList <>(2);
         filterPlusAnnotation.add(includeFilter);
 
         super.addIncludeFilter(new CustomRepositoryComponentProvider.AllTypeFilter(filterPlusAnnotation));
@@ -97,9 +97,9 @@ public class CustomRepositoryComponentProvider extends ClassPathScanningCandidat
      * Customizes the repository interface detection and triggers annotation detection on them.
      */
     @Override
-    public Set<BeanDefinition> findCandidateComponents(String basePackage) {
+    public Set <BeanDefinition> findCandidateComponents(String basePackage) {
 
-        Set<BeanDefinition> candidates = super.findCandidateComponents(basePackage);
+        Set <BeanDefinition> candidates = super.findCandidateComponents(basePackage);
 
         for (BeanDefinition candidate : candidates) {
             if (candidate instanceof AnnotatedBeanDefinition) {
@@ -150,7 +150,7 @@ public class CustomRepositoryComponentProvider extends ClassPathScanningCandidat
          *
          * @param targetType
          */
-        public InterfaceTypeFilter(Class<?> targetType) {
+        public InterfaceTypeFilter(Class <?> targetType) {
             super(targetType);
         }
 
@@ -173,14 +173,14 @@ public class CustomRepositoryComponentProvider extends ClassPathScanningCandidat
      */
     private static class AllTypeFilter implements TypeFilter {
 
-        private final List<TypeFilter> delegates;
+        private final List <TypeFilter> delegates;
 
         /**
          * Creates a new {@link CustomRepositoryComponentProvider.AllTypeFilter} to match if all the given delegates match.
          *
          * @param delegates must not be {@literal null}.
          */
-        public AllTypeFilter(List<TypeFilter> delegates) {
+        public AllTypeFilter(List <TypeFilter> delegates) {
 
             Assert.notNull(delegates, "TypeFilter deleages must not be null!");
             this.delegates = delegates;

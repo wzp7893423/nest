@@ -22,7 +22,7 @@ public class MybatisJdbcRepositoryFactory extends JdbcRepositoryFactory {
     private final SqlSession sqlSession;
 
 
-    public MybatisJdbcRepositoryFactory(ApplicationEventPublisher publisher, JdbcMappingContext context, DataAccessStrategy dataAccessStrategy,SqlSession sqlSession) {
+    public MybatisJdbcRepositoryFactory(ApplicationEventPublisher publisher, JdbcMappingContext context, DataAccessStrategy dataAccessStrategy, SqlSession sqlSession) {
 
         super(publisher, context, dataAccessStrategy);
         this.publisher = publisher;
@@ -36,12 +36,12 @@ public class MybatisJdbcRepositoryFactory extends JdbcRepositoryFactory {
     protected Object getTargetRepository(RepositoryInformation repositoryInformation) {
         JdbcPersistentEntityInformation persistentEntityInformation = context
                 .getRequiredPersistentEntityInformation(repositoryInformation.getDomainType());
-        MybatisJdbcEntityTemplate template = new MybatisJdbcEntityTemplate(publisher, context, accessStrategy,sqlSession);
-        return new MybatisSimpleRepository<>(template, persistentEntityInformation);
+        MybatisJdbcEntityTemplate template = new MybatisJdbcEntityTemplate(publisher, context, accessStrategy, sqlSession);
+        return new MybatisSimpleRepository <>(template, persistentEntityInformation);
     }
 
     @Override
-    protected Class<?> getRepositoryBaseClass(RepositoryMetadata repositoryMetadata) {
+    protected Class <?> getRepositoryBaseClass(RepositoryMetadata repositoryMetadata) {
         return MybatisSimpleRepository.class;
     }
 }

@@ -18,23 +18,24 @@ import java.util.Optional;
 /**
  * Created by wzp on 2018/6/12.
  */
-public abstract class AbstractMongoRepositorySupport<T extends MongoRepository> implements InitializingBean,FactoryBean,
+public abstract class AbstractMongoRepositorySupport<T extends MongoRepository> implements InitializingBean, FactoryBean,
         BeanFactoryAware, BeanClassLoaderAware, ApplicationEventPublisherAware {
 
     private BeanFactory beanFactory;
-    private  ClassLoader classLoader;
-    private Lazy<T> repository;
-    private  boolean lazyInit;
+    private ClassLoader classLoader;
+    private Lazy <T> repository;
+    private boolean lazyInit;
     private MongoRepositoryFactory factory;
-    private final  Class<? extends T> repositoryInterface;
+    private final Class <? extends T> repositoryInterface;
 
     private QueryLookupStrategy.Key queryLookupStrategyKey;
-    private Optional<Class<?>> repositoryBaseClass = Optional.empty();
-    private Optional<Object> customImplementation = Optional.empty();
-    private Optional<RepositoryComposition.RepositoryFragments> repositoryFragments = Optional.empty();
+    private Optional <Class <?>> repositoryBaseClass = Optional.empty();
+    private Optional <Object> customImplementation = Optional.empty();
+    private Optional <RepositoryComposition.RepositoryFragments> repositoryFragments = Optional.empty();
     private NamedQueries namedQueries;
     private EvaluationContextProvider evaluationContextProvider = DefaultEvaluationContextProvider.INSTANCE;
     private ApplicationEventPublisher publisher;
+
     public void setQueryLookupStrategyKey(QueryLookupStrategy.Key queryLookupStrategyKey) {
         this.queryLookupStrategyKey = queryLookupStrategyKey;
     }
@@ -62,13 +63,14 @@ public abstract class AbstractMongoRepositorySupport<T extends MongoRepository> 
     public void setEvaluationContextProvider(EvaluationContextProvider evaluationContextProvider) {
         this.evaluationContextProvider = evaluationContextProvider;
     }
+
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         this.publisher = applicationEventPublisher;
     }
 
-    AbstractMongoRepositorySupport(Class<? extends T> repositoryInterface){
-        Assert.notNull(repositoryInterface,"repositoryInterface is null");
+    AbstractMongoRepositorySupport(Class <? extends T> repositoryInterface) {
+        Assert.notNull(repositoryInterface, "repositoryInterface is null");
         this.repositoryInterface = repositoryInterface;
     }
 
@@ -95,13 +97,25 @@ public abstract class AbstractMongoRepositorySupport<T extends MongoRepository> 
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
         this.factory = createRepositoryFactory();
+
         this.factory.setBeanClassLoader(classLoader);
-        this.repository = Lazy.of(()->this.factory.getRepository(repositoryInterface));
-        if (!lazyInit){
+
+        RepositoryComposition.RepositoryFragments customImplementationFragment = customImplementation //
+                .map(RepositoryComposition.RepositoryFragments::just) //
+                .orElseGet(RepositoryComposition.RepositoryFragments::empty);
+
+        RepositoryComposition.RepositoryFragments repositoryFragmentsToUse = this.repositoryFragments //
+                .orElseGet(RepositoryComposition.RepositoryFragments::empty) //
+                .append(customImplementationFragment);
+
+        this.repository = Lazy.of(() -> this.factory.getRepository(repositoryInterface, repositoryFragmentsToUse));
+
+        if (!lazyInit) {
             repository.get();
         }
     }
 
-    protected abstract MongoRepositoryFactory createRepositoryFactory() ;
+    protected abstract MongoRepositoryFactory createRepositoryFactory();
 }

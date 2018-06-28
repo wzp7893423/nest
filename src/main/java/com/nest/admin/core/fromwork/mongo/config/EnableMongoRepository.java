@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @Import(MonogRepositoryRegistrar.class)
 public @interface EnableMongoRepository {
 
-    String[] value() default  {};
+    String[] value() default {};
 
     String[] basePackages() default {};
 
@@ -26,7 +26,7 @@ public @interface EnableMongoRepository {
 
     ComponentScan.Filter[] excludeFilters() default {};
 
-    Class<?> repositoryFactoryBeanClass() default  MongoRepositoryFactoryBean.class;
+    Class <?> repositoryFactoryBeanClass() default MongoRepositoryFactoryBean.class;
 
     String namedQueriesLocation() default "";
 

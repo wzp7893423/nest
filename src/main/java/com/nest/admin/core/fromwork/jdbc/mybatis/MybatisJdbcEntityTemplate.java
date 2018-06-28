@@ -36,7 +36,7 @@ public class MybatisJdbcEntityTemplate implements MybatisEntityOperations {
     private NamespaceStrategy namespaceStrategy = NamespaceStrategy.DEFAULT_INSTANCE;
 
     public MybatisJdbcEntityTemplate(ApplicationEventPublisher publisher, JdbcMappingContext context,
-                                     DataAccessStrategy dataAccessStrategy,SqlSession sqlSession) {
+                                     DataAccessStrategy dataAccessStrategy, SqlSession sqlSession) {
 
         this.publisher = publisher;
         this.context = context;
@@ -46,6 +46,7 @@ public class MybatisJdbcEntityTemplate implements MybatisEntityOperations {
         this.interpreter = new MybatisJdbcInterprete(context, accessStrategy);
         this.sqlSession = sqlSession;
     }
+
     @Override
     public <T> void save(T instance, Class <T> domainType) {
 
@@ -174,8 +175,8 @@ public class MybatisJdbcEntityTemplate implements MybatisEntityOperations {
     }
 
     @Override
-    public <T> List<T> selectList(String namespance, Map<String, Object> params,Class<T> domainType) {
-        return sqlSession.selectList(namespaceStrategy.getNamespace(domainType)+"."+namespance,new MyBatisContext(null,null,domainType,params));
+    public <T> List <T> selectList(String namespance, Map <String, Object> params, Class <T> domainType) {
+        return sqlSession.selectList(namespaceStrategy.getNamespace(domainType) + "." + namespance, new MyBatisContext(null, null, domainType, params));
     }
 
 

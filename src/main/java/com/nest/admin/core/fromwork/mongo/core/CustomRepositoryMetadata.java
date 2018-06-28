@@ -1,4 +1,4 @@
-package com.nest.admin.core.fromwork.mongo.config;
+package com.nest.admin.core.fromwork.mongo.core;
 
 import com.nest.admin.core.fromwork.mongo.repository.MongoRepository;
 import org.springframework.data.repository.core.CrudMethods;
@@ -18,20 +18,20 @@ import java.util.function.Supplier;
  */
 public class CustomRepositoryMetadata implements RepositoryMetadata {
 
-    private final TypeInformation<?> typeInformation;
-    private final Class<?> repositoryInterface;
-    private final Lazy<CrudMethods> crudMethods;
-    private final Class<?> domainType;
+    private final TypeInformation <?> typeInformation;
+    private final Class <?> repositoryInterface;
+    private final Lazy <CrudMethods> crudMethods;
+    private final Class <?> domainType;
 
-    public CustomRepositoryMetadata(Class<?> repositoryInterface) {
+    public CustomRepositoryMetadata(Class <?> repositoryInterface) {
         this.repositoryInterface = repositoryInterface;
         this.typeInformation = ClassTypeInformation.from(repositoryInterface);
         this.crudMethods = Lazy.of(() -> new DefaultCrudMethods(this));
 
-        List<TypeInformation<?>> arguments = ClassTypeInformation.from(repositoryInterface) //
+        List <TypeInformation <?>> arguments = ClassTypeInformation.from(repositoryInterface) //
                 .getRequiredSuperTypeInformation(MongoRepository.class)//
                 .getTypeArguments();
-        this.domainType = resolveTypeParameter(arguments,0,() -> String.format("Could not resolve domain type of %s!", repositoryInterface));
+        this.domainType = resolveTypeParameter(arguments, 0, () -> String.format("Could not resolve domain type of %s!", repositoryInterface));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CustomRepositoryMetadata implements RepositoryMetadata {
     }
 
     @Override
-    public Set<Class <?>> getAlternativeDomainTypes() {
+    public Set <Class <?>> getAlternativeDomainTypes() {
         return null;
     }
 
@@ -74,11 +74,12 @@ public class CustomRepositoryMetadata implements RepositoryMetadata {
         return false;
     }
 
-    public static RepositoryMetadata getMetadata(Class<?> repositoryInterface) {
-        return  new CustomRepositoryMetadata(repositoryInterface);
+    public static RepositoryMetadata getMetadata(Class <?> repositoryInterface) {
+        return new CustomRepositoryMetadata(repositoryInterface);
     }
-    private static Class<?> resolveTypeParameter(List<TypeInformation<?>> arguments, int index,
-                                                 Supplier<String> exceptionMessage) {
+
+    private static Class <?> resolveTypeParameter(List <TypeInformation <?>> arguments, int index,
+                                                  Supplier <String> exceptionMessage) {
         if (arguments.size() <= index || arguments.get(index) == null) {
             throw new IllegalArgumentException(exceptionMessage.get());
         }

@@ -39,22 +39,23 @@ public class Function {
 //        userRepository.findAll();
 //        System.out.println(userRepository.findAllByUserName("wzp"));
 //        System.out.println(userRepository.findName("wzp"));
-        Map<String,Object> params = new HashMap<String,Object>(1);
-        params.put("userName","wzp");
-        System.out.println(userRepository.selectList("findUserEntry",params));
+        Map <String, Object> params = new HashMap <String, Object>(1);
+        params.put("userName", "wzp");
+        System.out.println(userRepository.selectList("findUserEntry", params));
         List <User> list = Arrays.asList(new User[5]);
-        return  userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @RequestMapping("/static")
-    public Iterable<Statistics> get(){
+    public Iterable <Statistics> get() {
         return statisticsRepository.findAll();
     }
 
     @Autowired
     private CustomStatisticsRepository customStatisticsRepository;
+
     @RequestMapping("/set")
-    public  void set(){
+    public void set() {
         customStatisticsRepository.findALl();
     }
 }

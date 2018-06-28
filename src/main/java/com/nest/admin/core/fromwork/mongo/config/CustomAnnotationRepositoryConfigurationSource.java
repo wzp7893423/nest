@@ -13,7 +13,7 @@ import java.lang.annotation.Annotation;
 /**
  * Created by wzp on 2018/6/7.
  */
-public class CustomAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource{
+public class CustomAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource {
     private final Environment environment;
     private final BeanDefinitionRegistry registry;
 
@@ -23,7 +23,7 @@ public class CustomAnnotationRepositoryConfigurationSource extends AnnotationRep
         this.registry = registry;
     }
 
-    public Streamable<BeanDefinition> getCandidates(ResourceLoader loader) {
+    public Streamable <BeanDefinition> getCandidates(ResourceLoader loader) {
         CustomRepositoryComponentProvider scanner = new CustomRepositoryComponentProvider(getIncludeFilters(), registry);
         scanner.setConsiderNestedRepositoryInterfaces(shouldConsiderNestedRepositories());
         scanner.setEnvironment(environment);
