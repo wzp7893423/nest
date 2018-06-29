@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 @Data
-public class Statistics implements MongoRepository {
+public class Statistics {
     private String id, object;
 
     private TagNameGroup tagNameGroup;
