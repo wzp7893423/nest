@@ -40,7 +40,7 @@ public class MorphiaMongoEntityOperations implements MongoEntityOperations {
         Assert.notNull(mongoDataProperties, "mongoData config message is not allowed null");
         List <MongoDataProperties> mongoDataPropertiesList = buildMongoDataProperties(mongoDataProperties);
         for (MongoDataProperties mongoproperties : mongoDataPropertiesList) {
-            Datastore datastore = morphia.createDatastore(createMongoClient(mongoDataProperties), mongoDataProperties.getDatabase());
+            Datastore datastore = morphia.createDatastore(createMongoClient(mongoproperties), mongoproperties.getDatabase());
             if (mongoDataPropertiesList.size() == 1) {
                 datastores.put(DEFAULT_DATASTORE_NAME, datastore);
             } else {

@@ -11,11 +11,6 @@ import java.util.List;
 @NoRepositoryBean
 public interface MongoRepository<T> {
 
-    default public List <T> findALl() {
-        System.out.println("ssdfsdfsadfasd");
-        return Lists.newArrayList();
-    }
-
-    ;
+   public List <T> findALl();
 
 }
