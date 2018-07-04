@@ -55,7 +55,7 @@ public class Function {
     private CustomStatisticsRepository customStatisticsRepository;
 
     @RequestMapping("/set")
-    public void set() {
-        customStatisticsRepository.findALl();
+    public List<Statistics> set() {
+        return customStatisticsRepository.findALl();
     }
 }

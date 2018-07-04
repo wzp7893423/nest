@@ -7,6 +7,7 @@ import lombok.Data;
  */
 @Data
 public class UserEntry {
+
     private String userName, loginName;
 
     private int age;

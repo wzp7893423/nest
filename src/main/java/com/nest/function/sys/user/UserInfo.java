@@ -1,6 +1,6 @@
 package com.nest.function.sys.user;
 
-import com.nest.admin.core.fromwork.annotation.TableName;
+import com.nest.admin.core.annotation.TableName;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 @TableName("User")
 @Data
 public class UserInfo {
+
     private @Id
     Long id;
 

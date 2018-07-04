@@ -1,7 +1,8 @@
 package com.nest.function.staticd;
 
-import com.nest.admin.core.fromwork.mongo.repository.MongoRepository;
 import lombok.Data;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -9,8 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 @Data
+@Entity("statistics")
 public class Statistics {
-    private String id, object;
-
+    private String _id, object;
+//    @Reference
     private TagNameGroup tagNameGroup;
 }
