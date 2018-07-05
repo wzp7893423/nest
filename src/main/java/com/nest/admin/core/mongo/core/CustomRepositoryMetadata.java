@@ -1,5 +1,6 @@
 package com.nest.admin.core.mongo.core;
 
+import com.nest.admin.core.annotation.DbName;
 import com.nest.admin.core.mongo.repository.MongoRepository;
 import org.springframework.data.repository.core.CrudMethods;
 import org.springframework.data.repository.core.RepositoryMetadata;
@@ -10,6 +11,7 @@ import org.springframework.data.util.TypeInformation;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -32,6 +34,7 @@ public class CustomRepositoryMetadata implements RepositoryMetadata {
                 .getRequiredSuperTypeInformation(MongoRepository.class)//
                 .getTypeArguments();
         this.domainType = resolveTypeParameter(arguments, 0, () -> String.format("Could not resolve domain type of %s!", repositoryInterface));
+
     }
 
     @Override
@@ -73,6 +76,7 @@ public class CustomRepositoryMetadata implements RepositoryMetadata {
     public boolean isReactiveRepository() {
         return false;
     }
+
 
     public static RepositoryMetadata getMetadata(Class <?> repositoryInterface) {
         return new CustomRepositoryMetadata(repositoryInterface);

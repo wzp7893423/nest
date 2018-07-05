@@ -11,4 +11,6 @@ public interface MongoEntity<T> {
 
     public Class<T> getDomainType();
 
+    public String getDataBaseName();
+
 }

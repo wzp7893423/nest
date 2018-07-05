@@ -3,7 +3,6 @@ package com.nest.admin.core.mongo.core;
 import com.google.common.collect.Lists;
 import com.mongodb.MongoClient;
 import com.nest.admin.core.mongo.config.MongoDataProperties;
-import com.nest.function.staticd.Statistics;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.slf4j.Logger;
@@ -74,7 +73,12 @@ public class MorphiaMongoEntityOperations implements MongoEntityOperations {
 
 
     @Override
-    public <T> List <T> findAll(Class<T> domainType) {
-        return (List <T>) this.getDatastore("DTXYJK").find(Statistics.class).filter("object=","DTXYJK:TN:WTG055").asList();
+    public <T> List <T> findAll(Class <T> domainType, MongoEntity <T> mongoEntity) {
+        return (List <T>) this.getDatastore(mongoEntity.getDataBaseName()).createQuery(domainType).asList();
+    }
+
+    public <T> List <T> findAll(Class<T> domainType,MongoEntity<T> mongoEntity,Options options){
+        //
+        return  null;
     }
 }

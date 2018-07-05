@@ -22,6 +22,6 @@ public class SimpleMongoRepository<T> implements MongoRepository <T> {
     @Override
     public List<T> findALl() {
 //        return mongoEntityOperations.findAll();
-        return mongoEntityOperations.findAll(mongoEntity.getDomainType());
+        return mongoEntityOperations.findAll(mongoEntity.getDomainType(),mongoEntity);
     }
 }

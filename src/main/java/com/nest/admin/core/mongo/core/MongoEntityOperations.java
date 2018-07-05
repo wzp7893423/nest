@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface MongoEntityOperations {
 
-    <T> List<T> findAll(Class<T> domainType);
+    <T> List<T> findAll(Class <T> domainType, MongoEntity <T> mongoEntity);
 
 }

@@ -15,4 +15,9 @@ public class DefaultMongoEntity<T> implements MongoEntity<T> {
     public Class<T> getDomainType() {
         return (Class <T>) this.mongoEntityInformation.getDomainType();
     }
+
+    @Override
+    public String getDataBaseName(){
+        return mongoEntityInformation.getDataBaseName();
+    }
 }
