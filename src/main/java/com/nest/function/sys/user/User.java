@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
  * Created by wzp on 2018/5/14.
  */
 @Data
-@Alias("com.nest.admin.function.User")
+@Alias("com.nest.framework.function.User")
 public class User {
     private @Id
     Long id;

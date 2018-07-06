@@ -1,6 +1,6 @@
 package com.nest.function.sys.user;
 
-import com.nest.admin.core.annotation.TableName;
+import com.nest.framework.orm.annotation.TableName;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
