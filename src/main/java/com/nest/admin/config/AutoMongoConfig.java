@@ -1,5 +1,7 @@
-package com.nest.admin.core.mongo.config;
+package com.nest.admin.config;
 
+import com.nest.admin.core.mongo.config.EnableMongoRepository;
+import com.nest.admin.core.mongo.config.MongoDataProperties;
 import com.nest.admin.core.mongo.core.MongoEntityOperations;
 import com.nest.admin.core.mongo.core.MorphiaMongoEntityOperations;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -14,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(MongoDataProperties.class)
 public class AutoMongoConfig {
 
-    @Bean
-    public MongoEntityOperations initMongoEntityOperations(MongoDataProperties mongoDataProperties) {
-        return new MorphiaMongoEntityOperations(mongoDataProperties);
-    }
+//    @Bean
+//    public MongoEntityOperations initMongoEntityOperations(MongoDataProperties mongoDataProperties) {
+//        return new MorphiaMongoEntityOperations(mongoDataProperties);
+//    }
 }

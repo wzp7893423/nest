@@ -41,7 +41,6 @@ public class AutoDataJdbcConfig {
         datasource.setUsername(jdbcDataProperties.getUsername());
         datasource.setPassword(jdbcDataProperties.getPassword());
         datasource.setDriverClassName(jdbcDataProperties.getDriverClassName());
-
         //configuration
         datasource.setInitialSize(jdbcDataProperties.getInitialSize());
         datasource.setMinIdle(jdbcDataProperties.getMinIdle());

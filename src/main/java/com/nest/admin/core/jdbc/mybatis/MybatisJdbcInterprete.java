@@ -19,7 +19,6 @@ class MybatisJdbcInterprete implements Interpreter {
     private final DataAccessStrategy accessStrategy;
 
     MybatisJdbcInterprete(JdbcMappingContext context, DataAccessStrategy accessStrategy) {
-
         this.context = context;
         this.accessStrategy = accessStrategy;
     }
