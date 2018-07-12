@@ -11,18 +11,16 @@ public class MorphiaMongoEntityOperations implements MongoEntityOperations {
 
     private final Datastore datastore;
 
-    public MorphiaMongoEntityOperations(Datastore datastore) {
+    public MorphiaMongoEntityOperations(final Datastore datastore) {
         this.datastore = datastore;
     }
 
     @Override
-    public <T> List <T> findAll(Class <T> domainType, MongoEntity <T> mongoEntity) {
-        return null;
-//        return (List <T>) this.getDatastore(mongoEntity.getDataBaseName()).createQuery(domainType).asList();
+    public <T> List <T> findAll(final Class <T> domainType, final MongoEntity <T> mongoEntity) {
+        return datastore.find(domainType).asList();
     }
 
-    public <T> List <T> findAll(Class<T> domainType,MongoEntity<T> mongoEntity,Options options){
-        //
+    public <T> List <T> findAll(final  Class<T> domainType,final MongoEntity<T> mongoEntity,final  Options options){
         return  null;
     }
 }

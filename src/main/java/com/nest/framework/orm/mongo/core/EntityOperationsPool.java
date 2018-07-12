@@ -9,4 +9,5 @@ public interface EntityOperationsPool {
 
     public MongoEntityOperations getMongoEntityOperation(String dataBaseName);
 
+    public MongoEntityOperations getMongoEntityOperation(MongoEntityInformation mongoEntityInformation);
 }

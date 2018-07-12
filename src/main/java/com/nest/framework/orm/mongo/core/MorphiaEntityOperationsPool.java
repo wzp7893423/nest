@@ -26,11 +26,12 @@ public class MorphiaEntityOperationsPool implements EntityOperationsPool {
 
     private final Morphia morphia = new Morphia();
 
-    private ConcurrentHashMap<String, Datastore> datastores = new ConcurrentHashMap <String, Datastore>(1);
+    private final ConcurrentHashMap<String, Datastore> datastores;
 
     public MorphiaEntityOperationsPool(MongoDataProperties mongoDataProperties) {
         Assert.notNull(mongoDataProperties, "mongoData properties message is not allowed null");
         this.mongoDataProperties = mongoDataProperties;
+        datastores = new ConcurrentHashMap <String, Datastore>(1);
         addDatastore(mongoDataProperties);
     }
 
@@ -82,8 +83,22 @@ public class MorphiaEntityOperationsPool implements EntityOperationsPool {
         return getMongoEntityOperation(DEFAULT_DATASTORE_NAME);
     }
 
+    private String getDataBaseName(String dataBaseName){
+        if(!Optional.ofNullable(dataBaseName).isPresent()){
+            return buildMongoDataProperties(this.mongoDataProperties).get(0).getDatabase();
+        }else{
+            return dataBaseName;
+        }
+    }
+
     @Override
     public MongoEntityOperations getMongoEntityOperation(String dataBaseName) {
+        dataBaseName = getDataBaseName(dataBaseName);
         return new MorphiaMongoEntityOperations(getDatastore(dataBaseName));
+    }
+
+    @Override
+    public MongoEntityOperations getMongoEntityOperation(MongoEntityInformation mongoEntityInformation) {
+        return getMongoEntityOperation(mongoEntityInformation.getDataBaseName());
     }
 }

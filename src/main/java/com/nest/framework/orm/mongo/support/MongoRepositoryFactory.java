@@ -39,7 +39,7 @@ public class MongoRepositoryFactory implements BeanClassLoaderAware, BeanFactory
 
     protected Object getTargetRepository(MongoEntityInformation mongoEntityInformation) {
         MongoEntity mongoEntity = new DefaultMongoEntity(mongoEntityInformation);
-        return new SimpleMongoRepository <>(null, mongoEntity);
+        return new SimpleMongoRepository <>(entityOperationsPool.getMongoEntityOperation(mongoEntityInformation), mongoEntity);
     }
 
     @SuppressWarnings({"unchecked"})

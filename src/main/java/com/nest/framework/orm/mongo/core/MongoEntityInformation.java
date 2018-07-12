@@ -36,7 +36,7 @@ public class MongoEntityInformation {
        if(dataBaseName.isPresent()){
            return dataBaseName.get().value();
        }else{
-           return "default";
+           return null;
        }
     }
 
